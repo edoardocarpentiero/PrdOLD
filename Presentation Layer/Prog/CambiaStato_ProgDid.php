@@ -91,8 +91,8 @@ echo '
             <ul class="nav navbar-nav">
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                 <img src="'.$_SESSION['fotoProfilo'].'" class="user-image" alt="User Image">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" name="utenteLog">
+                 <img src="'.$_SESSION['fotoProfilo'].'" class="user-image"  alt="User Image">
                   <span class="hidden-xs">'.$_SESSION['username'].'</span>
                 </a>
                 <ul class="dropdown-menu">
