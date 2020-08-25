@@ -3,6 +3,9 @@
 if(!isset($_SESSION))
     session_start();
 
+ini_set('display_errors', 0);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
 ?>
 
 
@@ -346,8 +349,8 @@ echo '
 								<td>
 								<select class="form-control" name="corso" id="corso" style="width: 160px;" onchange="getElementi()">
 			                       	<option value=""></option>
-                                    <option value="laurea">Laurea</option>
-			                       	<option value="magistrale">Laurea Magistrale</option>
+                                    <option value="Laurea">Laurea</option>
+			                       	<option value="Laurea Magistrale">Laurea Magistrale</option>
 			                    </select>
 								</td>
 			                    <!-- DECIDERE IL FORMATO DI ANNO ACCADEMICO -->
@@ -451,9 +454,9 @@ echo '
 			for (var i = sec.length - 1; i >= 0; i--)
 				sec.remove(i);
 
-			if(a.value == "laurea")
+			if(a.value == "Laurea")
             	numAnni=3;
-            else if(a.value == "magistrale")
+            else if(a.value == "Laurea Magistrale")
             	numAnni=2;
             else 
             	numAnni=0;

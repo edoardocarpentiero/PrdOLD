@@ -48,23 +48,24 @@ class GestioneProgrammazioneDidattica{
             {
     			$query="SELECT Versione FROM Programmazione_Didattica WHERE Anno_corso='".$progD->getAnnoCorso()."' AND Anno_Accademico='".$progD->getAnnoAccademico()."'
             	AND Corso='".$progD->getCorso()."' AND Semestre='".$progD->getSemestre()."'  ORDER BY Versione ";
+
     			$risultatoQuery = $this->database->eseguiQuery($query);
                 	while($row = mysqli_fetch_array($risultatoQuery))
                 	{
                 		$num+=1;
                     	$vers = $row['Versione'];
                 	}
-                    
-            if($num!=0){
-    			$query="INSERT INTO Programmazione_Didattica (ID,Anno_corso, Corso, Semestre, Tot_OreLab, Tot_OreTeoria, Anno_Accademico, Versione, Stato, ID_Regolamento) 
-        		VALUES (".$_SESSION['IDprogD'].",".$progD->getAnnoCorso().",'".$progD->getCorso()."',".$progD->getSemestre().",".$progD->getTotOreLab().",".$progD->getTotOreTeoria().",'".$progD->getAnnoAccademico()."',($vers+1),'Draft',".$progD->getIDRegolamento().")";
-           		
-            }
-            else {
-            	$query="INSERT INTO Programmazione_Didattica (ID,Anno_corso, Corso, Semestre, Tot_OreLab, Tot_OreTeoria, Anno_Accademico, Versione, Stato, ID_Regolamento) 
-        		VALUES (".$_SESSION['IDprogD'].",".$progD->getAnnoCorso().",'".$progD->getCorso()."',".$progD->getSemestre().",".$progD->getTotOreLab().",".$progD->getTotOreTeoria().",'".$progD->getAnnoAccademico()."',1,'Draft',".$progD->getIDRegolamento().")";
-            }
-    		$this->database->eseguiQuery($query);
+
+                if($num!=0){
+                    $query="INSERT INTO Programmazione_Didattica (ID,Anno_corso, Corso, Semestre, Tot_OreLab, Tot_OreTeoria, Anno_Accademico, Versione, Stato, ID_Regolamento) 
+                    VALUES (".$_SESSION['IDprogD'].",".$progD->getAnnoCorso().",'".$progD->getCorso()."',".$progD->getSemestre().",".$progD->getTotOreLab().",".$progD->getTotOreTeoria().",'".$progD->getAnnoAccademico()."',($vers+1),'Draft',".$progD->getIDRegolamento().")";
+
+                }
+                else {
+                    $query="INSERT INTO Programmazione_Didattica (ID,Anno_corso, Corso, Semestre, Tot_OreLab, Tot_OreTeoria, Anno_Accademico, Versione, Stato, ID_Regolamento) 
+                    VALUES (".$_SESSION['IDprogD'].",".$progD->getAnnoCorso().",'".$progD->getCorso()."',".$progD->getSemestre().",".$progD->getTotOreLab().",".$progD->getTotOreTeoria().",'".$progD->getAnnoAccademico()."',1,'Draft',".$progD->getIDRegolamento().")";
+                }
+                $this->database->eseguiQuery($query);
            }//fine if  
         
         $query="SELECT * FROM Associa WHERE Matricola_Insegnamento='".$associa->getInsegnamento()."' AND Classe='".$associa->getClasse()."' AND ID_ProgDid='".$_SESSION['IDprogD']."' AND Matricola_Professore='".$associa->getDocente()."'
@@ -314,84 +315,85 @@ if(isset($_POST["funzione"])){
 		header("Location: /PrdOLD/Presentation%20Layer/Prog/Crea_ProgDid.php");
 	}
 	break;
-        
+
         case "creaProgD":
-        	//Verifica quanti, e quali, record(righe nel Database) mandare al metodo CreaProgd(), che li inserirà nel DB
-                $_SESSION['rigaPrD'] +=1;
-                $i=0;
-                $databaseE=new Database();
-                $databaseE->connettiDB();
-                $IDinsegnamento = 0;
-                $nomeInsegnamento = "";
-                $esame= $_POST['insegnamento'];
+            //Verifica quanti, e quali, record(righe nel Database) mandare al metodo CreaProgd(), che li inserirà nel DB
+            session_start();
+            $_SESSION['rigaPrD'] +=1;
+            $i=0;
+            $databaseE=new Database();
+            $databaseE->connettiDB();
+            $IDinsegnamento = 0;
+            $nomeInsegnamento = "";
+            $esame= $_POST['insegnamento'];
 
 
-                //Prendo l'ID dell'esame da associare
-                $query = "SELECT Matricola_Insegnamento FROM Insegnamento WHERE Denominazione='".$esame."'";
-                    $risultatoQuery = $databaseE->eseguiQuery($query);
-                    while($row = mysqli_fetch_array($risultatoQuery))
-                        $IDinsegnamento = $row['Matricola_Insegnamento'];
+            //Prendo l'ID dell'esame da associare
+            $query = "SELECT Matricola_Insegnamento FROM Insegnamento WHERE Denominazione='".$esame."'";
+            $risultatoQuery = $databaseE->eseguiQuery($query);
+            while($row = mysqli_fetch_array($risultatoQuery))
+                $IDinsegnamento = $row['Matricola_Insegnamento'];
 
-                    //Oggetto ProgD
-                    //$oreT,$oreL
-                     $progD = new ProgrammazioneDidattica('',$_POST['annoDiCorso'],$_POST['laurea'], $_POST['semestre'],0,0, $_POST['annoAccademico'], "1","Draft", $_SESSION['curriculumProgDid']);
-                     $docenti = $_POST['docente10'];
-                     $oreTeoria = $_POST['oreTeoria10'];
-                     $oreLab = $_POST['oreLab10'];
-                     $numRiga = $_SESSION['rigaPrD'];
-                     $IDprogD=$_SESSION['IDprogD'];
-                    //echo $docenti."-".$oreTeoria;
-                    $count=0;
-                for($i=1; $i<=$_POST['classi']; $i++)
+
+
+            //Oggetto ProgD
+            //$oreT,$oreL
+            $progD = new ProgrammazioneDidattica('',$_POST['annoDiCorso'],$_POST['laurea'], $_POST['semestre'],0,0, $_POST['annoAccademico'], "1","Draft", $_SESSION['curriculumProgDid']);
+            $docenti = $_POST['docente10'];
+            $oreTeoria = $_POST['oreTeoria10'];
+            $oreLab = $_POST['oreLab10'];
+
+            $numRiga = $_SESSION['rigaPrD'];
+
+            $count=0;
+            for($i=1; $i<=$_POST['classi']; $i++)
+            {
+                foreach($docenti as $key => $d)
                 {
-                    foreach($docenti as $key => $d)
-                     {
-                        $mat = explode(".", $d);
-                     }//end foreach
-                    $mat = explode(".", $docenti);
-                    $_SESSION['docente'.$numRiga.'0']= $mat[0];
-                    $_SESSION['oreTeoria'.$numRiga.'0']=$oreTeoria;
-                    $_SESSION['oreLab'.$numRiga.'0']=$oreLab;
-                    $_SESSION['insegnamento'.$numRiga.'0'] = $esame;
-                    $_SESSION['classe'.$numRiga] = $i;
-
-                    $associa = new Associa($IDinsegnamento,$i, $IDprogD, $mat[0], $oreTeoria, $oreLab);
-                    //CREA PROG. DIDATTICA
-                    //$gestionePrD->CreaProgD($progD, $associa);
-                    $_SESSION['progDinseritagia']=1;
-                    //inserito il primo docente, controllo, e nel caso inserisco, se all'insegnamento sono stati assegnati piu docenti
-                    for($k=1; $k<=$numRiga; $k++)
+                    $mat = explode(".", $d);
+                }//end foreach
+                $mat = explode(".", $docenti);
+                $_SESSION['docente'.$numRiga.'0']= $mat[0];
+                $_SESSION['oreTeoria'.$numRiga.'0']=$oreTeoria;
+                $_SESSION['oreLab'.$numRiga.'0']=$oreLab;
+                $_SESSION['insegnamento'.$numRiga.'0'] = $esame;
+                $_SESSION['classe'.$numRiga] = $i;
+                $associa = new Associa($IDinsegnamento,$i, $IDprogD, $mat[0], $oreTeoria, $oreLab);
+                //CREA PROG. DIDATTICA
+                $gestionePrD->CreaProgD($progD, $associa);
+                $_SESSION['progDinseritagia']=1;
+                //inserito il primo docente, controllo, e nel caso inserisco, se all'insegnamento sono stati assegnati piu docenti
+                for($k=1; $k<=5; $k++)
+                {
+                    if($_POST['docente'.$i.''.$k] != 0)
                     {
-                        if($_POST['docente'.$i.''.$k] != 0)
-                      {
-                            $docenti = $_POST['docente'.$i.''.$k];
+                        $docenti = $_POST['docente'.$i.''.$k];
 
-                            foreach($docenti as $key => $d)
-                             {
-                                $mat = explode(".", $d);
-                             }//end foreach
-						  $mat = explode(".", $docenti);
-                            $oreTeoria = $_POST['oreTeoria1'.$k];
-                            $oreLab = $_POST['oreLab1'.$k];
-                            $_SESSION['docente'.$numRiga.''.$k] = $mat[0];
-                            $_SESSION['oreTeoria'.$numRiga.''.$k]=$oreTeoria;
-                            $_SESSION['oreLab'.$numRiga.''.$k]=$oreLab;
-                            $associa = new Associa($IDinsegnamento, $i, $IDprogD, $mat[0], $oreTeoria, $oreLab);
-                            $gestionePrD->CreaProgD($progD, $associa);
-                        }
-                     }
-                     //end for
+                        foreach($docenti as $key => $d)
+                        {
+                            $mat = explode(".", $d);
+                        }//end foreach
+                        $mat = explode(".", $docenti);
+                        $oreTeoria = $_POST['oreTeoria1'.$k];
+                        $oreLab = $_POST['oreLab1'.$k];
+                        $_SESSION['docente'.$numRiga.''.$k] = $mat[0];
+                        $_SESSION['oreTeoria'.$numRiga.''.$k]=$oreTeoria;
+                        $_SESSION['oreLab'.$numRiga.''.$k]=$oreLab;
+                        $associa = new Associa($IDinsegnamento, $i, $IDprogD, $mat[0], $oreTeoria, $oreLab);
+                        $gestionePrD->CreaProgD($progD, $associa);
+                    }
+                }//end for
 
-                        $docenti = $_POST['docente'.($i+1).'0'];
-                        $oreTeoria = intval($_POST['oreTeoria'.($i+1).'0']);
-                        $oreLab = intval($_POST['oreLab'.($i+1).'0']);
-                        $_SESSION['rigaPrD'] +=1;
-                        $numRiga +=1;
-         }//end for Numclassi
-                $_SESSION['rigaPrD'] -= 1;
-                $_SESSION['progDinCorso']=1;
-                header("Location: /PrdOLD/Presentation%20Layer/Prog/Crea_ProgDid_pagina.php?laurea=".$_POST['laurea']."&annoAccademico=".$_POST['annoAccademico']."&annoDiCorso=".$_POST['annoDiCorso']."&classi=".$_POST['classi']."&semestre=".$_POST['semestre']."&curriculum=".$_POST['curriculum'].".".$_SESSION['curriculumProgDid']."");
-    break;
+                $docenti = $_POST['docente'.($i+1).'0'];
+                $oreTeoria = intval($_POST['oreTeoria'.($i+1).'0']);
+                $oreLab = intval($_POST['oreLab'.($i+1).'0']);
+                $_SESSION['rigaPrD'] +=1;
+                $numRiga +=1;
+            }//end for Numclassi
+            $_SESSION['rigaPrD'] -= 1;
+            $_SESSION['progDinCorso']=1;
+            header("Location: /PrdOLD/Presentation%20Layer/Prog/Crea_ProgDid_pagina.php?laurea=".$_POST['laurea']."&annoAccademico=".$_POST['annoAccademico']."&annoDiCorso=".$_POST['annoDiCorso']."&classi=".$_POST['classi']."&semestre=".$_POST['semestre']."&curriculum=".$_POST['curriculum'].".".$_SESSION['curriculumProgDid']."");
+            break;
             
         case "caricoDidattico":
 			//echo $gestionePrD->getCaricoDidattico($_POST["nm"], $_POST["cn"]);
