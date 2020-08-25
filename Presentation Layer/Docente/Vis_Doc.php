@@ -3,6 +3,8 @@
 if(!isset($_SESSION))
     session_start();
 
+ini_set('display_errors', 0);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 ?>
 <!--
     Vis_Doc
@@ -103,7 +105,7 @@ echo '
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-right">
-                      <form name="logout" method="post" action="/PrdOLD/PrdOLD/Application%20Layer/GestioneAutenticazione/Autenticazione.php">
+                      <form name="logout" method="post" action="/PrdOLD/Application%20Layer/GestioneAutenticazione/Autenticazione.php">
 					  <input type="hidden" name="funzione" value="logout">
 					  <input type="hidden" name="nomepagina" value="/PrdOLD/Presentation%20Layer/index.php">
 					  <input type="submit" name="Logout" value="Logout"  style="background-color: #FF8800 !important;
