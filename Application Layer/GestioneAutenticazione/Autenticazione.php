@@ -51,7 +51,7 @@ else{
 	$_SESSION['presidente'] = false;
     $_SESSION['logged'] = false;
     echo 'NONE';
-	header('/PrOLD/Presentation%20Layer/index.php');
+	header('/PrdOLD/Presentation%20Layer/index.php');
     }
 }//chiudi funzione Login
 
@@ -63,7 +63,7 @@ function logout()
     session_destroy();
     //prendo la pagina corrente e la aggiorno
     $curpage = $_POST['nomepagina'];
-header("Location: /PrOLD/Presentation%20Layer/index.php");
+header("Location: /PrdOLD/Presentation%20Layer/index.php");
 }// Chiudi Logout          
 }//Chiudi Class
 

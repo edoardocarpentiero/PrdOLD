@@ -68,26 +68,26 @@ if(isset($_POST["funzione"])){
 	$gestioneAccount=new GestioneAccount();
 	switch($_POST["funzione"]){
 		case "aggiungiaccount":
-			$account=new Account($_POST["username"], $_POST["password"], "/PrOLD/Presentation%20Layer/dist/img/ImmaginiProfilo/avatar.jpg", $_POST["matricola"]);
+			$account=new Account($_POST["username"], $_POST["password"], "/PrdOLD/Presentation%20Layer/dist/img/ImmaginiProfilo/avatar.jpg", $_POST["matricola"]);
 			$risultato=$gestioneAccount->aggiungiAccount($account);
                 if($risultato)
                 {
 					$_SESSION['aggiuntaAccount']=1;
-                    header("location:/PrOLD/Presentation%20Layer/Account/Add_Acc.php");
+                    header("location:/PrdOLD/Presentation%20Layer/Account/Add_Acc.php");
                 }
 				else { 
                 	if( $_SESSION['aggiuntaAccount'] == 3)
-                    	header("location:/PrOLD/Presentation%20Layer/Account/Add_Acc.php");
+                    	header("location:/PrdOLD/Presentation%20Layer/Account/Add_Acc.php");
                     else {
                     $_SESSION['aggiuntaAccount']=2;
-					header("location:/PrOLD/Presentation%20Layer/Account/Add_Acc.php");
+					header("location:/PrdOLD/Presentation%20Layer/Account/Add_Acc.php");
                     } 
                 }
 		break;
         case "deleteAccount":
         	$risultato=$gestioneAccount->removeAccount($_POST['username']);
              if($risultato)
-             	header("location:/PrOLD/Presentation%20Layer/Account/Del_Acc.php");
+             	header("location:/PrdOLD/Presentation%20Layer/Account/Del_Acc.php");
         break;
 }
 }

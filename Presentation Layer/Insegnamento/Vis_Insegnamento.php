@@ -45,7 +45,7 @@
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="/PrOLD/Presentation%20Layer/index.php" class="logo">
+        <a href="/PrdOLD/Presentation%20Layer/index.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>P</b>r.<b>D.</b></span>
           <!-- logo for regular state and mobile devices -->
@@ -322,7 +322,7 @@ function cambiaElenco(dati){
     if(parseInt(dati)!=0){
           dati=new FormData(document.getElementById("formCorso"));
           httpRequest = new XMLHttpRequest(); 
-          httpRequest.open("POST","/PrOLD/Application%20Layer/GestioneInsegnamenti/getDati.php", true);
+          httpRequest.open("POST","/PrdOLD/Application%20Layer/GestioneInsegnamenti/getDati.php", true);
           httpRequest.send(dati);
           httpRequest.onreadystatechange=function(){
                 if (httpRequest.readyState==4 && httpRequest.status==200){

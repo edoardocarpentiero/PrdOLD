@@ -18,7 +18,7 @@ if(!isset($_SESSION))
   <head>
   <?php
 	if($_SESSION['presidente'] == false OR $_SESSION['logged']==false)
-		header("/PrOLD/Presentation%20Layer/index.php")
+		header("/PrdOLD/Presentation%20Layer/index.php")
 	?>
 	
     <meta charset="utf-8">
@@ -70,7 +70,7 @@ if(!isset($_SESSION))
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="/PrOLD/Presentation%20Layer/index.php" class="logo">
+        <a href="/PrdOLD/Presentation%20Layer/index.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>P</b>r.<b>D.</b></span>
           <!-- logo for regular state and mobile devices -->
@@ -547,7 +547,7 @@ function salva(){
               dati.append("tipologiaAttivitaFormativa",form.tipologiaAttivitaFormativa.value);
               dati.append("modulo",form.modulo.value);
               
-              httpRequest.open("POST","/PrOLD/Application%20Layer/GestioneInsegnamenti/getDati.php", true);
+              httpRequest.open("POST","/PrdOLD/Application%20Layer/GestioneInsegnamenti/getDati.php", true);
               httpRequest.send(dati);
               httpRequest.onreadystatechange=function(){
                   if (httpRequest.readyState==4 && httpRequest.status==200){

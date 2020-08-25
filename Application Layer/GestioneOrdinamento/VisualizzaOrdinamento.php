@@ -459,5 +459,5 @@ if(!isset($_SESSION))
 					$tabella .= "</tr></tfoot>";
 
 						$_SESSION['ordinamento'] = "".$tabella;
-						header("location:/PrOLD/Presentation%20Layer/Ordinamento/Vis_OrdinamentoScelto.php");
+						header("location:/PrdOLD/Presentation%20Layer/Ordinamento/Vis_OrdinamentoScelto.php");
 ?>

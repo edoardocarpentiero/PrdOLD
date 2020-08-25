@@ -301,7 +301,7 @@ if(isset($_POST["funzione"])){
 		$_SESSION['IDprogD'] = 0;
 		$_SESSION['rigaPrD'] = 0;
 		
-		header("Location: /PrOLD/Presentation%20Layer/Prog/Crea_ProgDid.php");
+		header("Location: /PrdOLD/Presentation%20Layer/Prog/Crea_ProgDid.php");
 	}
 	
 	if(isset($_POST['submitConferma']))
@@ -309,7 +309,7 @@ if(isset($_POST["funzione"])){
     	$_SESSION['progDinseritagia'] = 0;
         $_SESSION['IDprogD'] = 0;
 		$_SESSION['rigaPrD'] = 0;
-		header("Location: /PrOLD/Presentation%20Layer/Prog/Crea_ProgDid.php");
+		header("Location: /PrdOLD/Presentation%20Layer/Prog/Crea_ProgDid.php");
 	}
 	break;
         
@@ -388,7 +388,7 @@ if(isset($_POST["funzione"])){
          }//end for Numclassi
                 $_SESSION['rigaPrD'] -= 1;
                 $_SESSION['progDinCorso']=1;
-                header("Location: /PrOLD/Presentation%20Layer/Prog/Crea_ProgDid_pagina.php?laurea=".$_POST['laurea']."&annoAccademico=".$_POST['annoAccademico']."&annoDiCorso=".$_POST['annoDiCorso']."&classi=".$_POST['classi']."&semestre=".$_POST['semestre']."&curriculum=".$_POST['curriculum'].".".$_SESSION['curriculumProgDid']."");
+                header("Location: /PrdOLD/Presentation%20Layer/Prog/Crea_ProgDid_pagina.php?laurea=".$_POST['laurea']."&annoAccademico=".$_POST['annoAccademico']."&annoDiCorso=".$_POST['annoDiCorso']."&classi=".$_POST['classi']."&semestre=".$_POST['semestre']."&curriculum=".$_POST['curriculum'].".".$_SESSION['curriculumProgDid']."");
     */break;
             
         case "caricoDidattico":

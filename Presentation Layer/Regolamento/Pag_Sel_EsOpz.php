@@ -20,7 +20,7 @@ if(!isset($_SESSION))
   <head>
     <?php
 	if($_SESSION['presidente'] == false OR $_SESSION['logged']==false)
-		header("location:/PrOLD/Presentation%20Layer/index.php")
+		header("location:/PrdOLD/Presentation%20Layer/index.php")
 	?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -76,7 +76,7 @@ if(!isset($_SESSION))
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="/PrOLD/Presentation%20Layer/index.php" class="logo">
+        <a href="/PrdOLD/Presentation%20Layer/index.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>P</b>r.<b>D.</b></span>
           <!-- logo for regular state and mobile devices -->
