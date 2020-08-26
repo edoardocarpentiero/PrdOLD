@@ -1,0 +1,10 @@
+use myprd_old;
+delete from associa where ID_ProgDid=1;
+SELECT * FROM myprd_old.associa;
+
+use myprd_old;
+SET SQL_SAFE_UPDATES = 0;
+Update associa
+set Matricola_Professore=201515166
+where Matricola_Professore=201515165;
+SELECT * FROM myprd_old.associa;
